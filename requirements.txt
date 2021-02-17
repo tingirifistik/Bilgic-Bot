@@ -1,0 +1,5 @@
+pyautogui
+win32api
+requests
+beautifulsoup4
+pyperclip
