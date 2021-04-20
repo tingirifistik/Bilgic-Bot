@@ -49,34 +49,22 @@ while True:
         
     elif menu == 2:
         system("cls")
-        try:
-            harf = str(input("Atasözü hangi harf ile başlasın(küçük karekter giriniz): "))
-        except ValueError:
+        harf = str(input("Atasözü hangi harf ile başlasın(büyük karakter giriniz): "))
+        if harf.isupper() is False:
             system("cls")
-            print("Lütfen harf giriniz.")
-            sleep(4)
+            print("Lütfen büyük karakter giriniz..")
+            sleep(3)
             system("cls")
             continue
-        if harf == "ü":
-            harf = "u2"
-        if harf == "ş":
-            harf = "s2"
-        if harf == "ö":
-            harf = "o2"
-        if harf == "ı":
-            harf = "i2"
-        if harf == "ç":
-            harf = "c2"
-        soup = BeautifulSoup((requests.get(f"https://www.dilbilgisi.net/{harf}-harfi-atasozleri-sozlugu/").content), "html.parser")
 
-        div = soup.find("div", {"class":"td-post-content tagdiv-type"}).find_all("p")
+        soup = BeautifulSoup((requests.get(f"https://tr.wikiquote.org/wiki/T%C3%BCrk%C3%A7e_atas%C3%B6zleri/{harf}").content), "html.parser")
+
+        div = soup.find("div", {"class":"mw-parser-output"}).find("ul").find_all("li")
 
         liste = []
-        for p in div:
-            atasoz = p.find("strong").text
-            atasoz1 = atasoz.strip(":")
-            liste.append(atasoz1)
-        liste.remove('ANLAMINI ÖĞRENMEK İSTEDİĞİNİZ ATASÖZÜNÜN İLK HARFİNİ AŞAĞIDAKİ LİSTEDEN SEÇİNİZ!')
+        for li in div:
+            atasoz= ((li.text).split("."))
+            liste.append(atasoz[0])
         system("cls")
         print("Atasözlerini yazdırmak istediğiniz yere tıklayın..")
         sleep(2)
