@@ -1,5 +1,5 @@
-pyautogui
+PyAutoGUI==0.9.53
+requests==2.26.0
+pyperclip==1.8.2
 pypiwin32
-requests
-beautifulsoup4
-pyperclip
+beautifulsoup4==4.10.0
